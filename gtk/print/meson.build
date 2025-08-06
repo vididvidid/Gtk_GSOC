@@ -33,6 +33,7 @@ if os_unix
     'gtkprintunixdialog.h',
     'gtkprinter.h',
     'gtkprintjob.h',
+    'gtkprintpreviewpane.h',
   ])
 
   gtk_unix_print_sources += files([
@@ -48,7 +49,9 @@ if os_unix
     'gtkprintoperation-unix.c',
     'gtkprintoperation-portal.c',
     'gtkprintunixdialog.c',
+    'gtkprintpreviewpane.c',
   ])
+
 endif
 
 gtk_win32_print_headers = []

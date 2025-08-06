@@ -442,7 +442,9 @@ if os_linux
 else
 endif
 
-# Dependencies
+# dependencies
+poppler_req = '>= 22.01'
+poppler_dep = dependency('poppler-glib', version: poppler_req, required: true)
 glib_dep       = dependency('glib-2.0', version: glib_req)
 gi_dep         = dependency('gobject-introspection-1.0', version: gi_req, required: get_option('introspection').enabled())
 gobject_dep    = dependency('gobject-2.0', version: glib_req)

@@ -181,6 +181,7 @@ gtk_print_error_quark (void)
 static void
 gtk_print_operation_finalize (GObject *object)
 {
+  g_print("yash kumar kasaudha: gtkprintoperation.c -> gtk_print_operation_finalize\n");
   GtkPrintOperation *op = GTK_PRINT_OPERATION (object);
   GtkPrintOperationPrivate *priv = gtk_print_operation_get_instance_private (op);
 
@@ -220,6 +221,7 @@ gtk_print_operation_finalize (GObject *object)
 static void
 gtk_print_operation_init (GtkPrintOperation *operation)
 {
+  g_print("yash kumar kasaudhan: gtkprintoperation.c -> gtk_print_operation_init\n");
   GtkPrintOperationPrivate *priv = gtk_print_operation_get_instance_private (operation);
   const char *appname;
 
@@ -260,7 +262,7 @@ static void
 preview_iface_render_page (GtkPrintOperationPreview *preview,
 			   int                       page_nr)
 {
-
+ g_print("yash kumar kasaudhan: gtkprintoperation.c -> preview_iface_render_page\n");
   GtkPrintOperation *op;
 
   op = GTK_PRINT_OPERATION (preview);
@@ -270,6 +272,7 @@ preview_iface_render_page (GtkPrintOperationPreview *preview,
 static void
 preview_iface_end_preview (GtkPrintOperationPreview *preview)
 {
+  g_print("yash kumar kasaudhan: gtkprintoperation.c -> preview_iface_end_preview\n");
   GtkPrintOperation *op;
   GtkPrintOperationResult result;
   
@@ -299,6 +302,7 @@ static gboolean
 preview_iface_is_selected (GtkPrintOperationPreview *preview,
 			   int                       page_nr)
 {
+  g_print("yash kumar kasaudhan: gtkprintoperation.c -> preview_iface_is_selected\n");
   GtkPrintOperation *op = GTK_PRINT_OPERATION (preview);
   GtkPrintOperationPrivate *priv = gtk_print_operation_get_instance_private (op);
   int i;
@@ -326,6 +330,7 @@ preview_iface_is_selected (GtkPrintOperationPreview *preview,
 static void
 preview_iface_init (GtkPrintOperationPreviewIface *iface)
 {
+  g_print("yash kumar kasaudhan: gtkprintoperation.c -> preview_iface_init\n");
   iface->render_page = preview_iface_render_page;
   iface->end_preview = preview_iface_end_preview;
   iface->is_selected = preview_iface_is_selected;
@@ -336,6 +341,7 @@ preview_start_page (GtkPrintOperation *op,
 		    GtkPrintContext   *print_context,
 		    GtkPageSetup      *page_setup)
 {
+  g_print("yash kumar kasaudhan: gtkprintoperation.c -> preview_start_page\n");
   if ((op->priv->manual_number_up < 2) ||
       (op->priv->page_position % op->priv->manual_number_up == 0))
     g_signal_emit_by_name (op, "got-page-size", print_context, page_setup);
@@ -345,6 +351,7 @@ static void
 preview_end_page (GtkPrintOperation *op,
 		  GtkPrintContext   *print_context)
 {
+  g_print("yash kumar kasaudhan: gtkprintoperation.c -> preview_end_page\n");
   cairo_t *cr;
 
   cr = gtk_print_context_get_cairo_context (print_context);
@@ -360,6 +367,7 @@ preview_end_run (GtkPrintOperation *op,
 		 gboolean           wait,
 		 gboolean           cancelled)
 {
+  g_print("yash kumar kasaudhan: gtkprintoperation.c -> preview_end_run\n");
   g_free (op->priv->page_ranges);
   op->priv->page_ranges = NULL;
 }
@@ -371,6 +379,7 @@ gtk_print_operation_set_property (GObject      *object,
 				  const GValue *value,
 				  GParamSpec   *pspec)
 {
+  g_print("yash kumar kasaudhan: gtkprintoperation.c -> gtk_print_operation_set_property\n");
   GtkPrintOperation *op = GTK_PRINT_OPERATION (object);
   
   switch (prop_id)
@@ -432,6 +441,7 @@ gtk_print_operation_get_property (GObject    *object,
 				  GValue     *value,
 				  GParamSpec *pspec)
 {
+  g_print("yash kumar kasaudhan: gtkprintoperation.c -> gtk_print_operation_get_property\n");
   GtkPrintOperation *op = GTK_PRINT_OPERATION (object);
   GtkPrintOperationPrivate *priv = gtk_print_operation_get_instance_private (op);
 
@@ -536,6 +546,7 @@ typedef struct
 static void
 preview_print_idle_done (gpointer data)
 {
+  g_print("yash kumar kasaudhan: gtkprintoperation.c -> preview_print_idle_done\n");
   GtkPrintOperation *op;
   PreviewOp *pop = (PreviewOp *) data;
 
@@ -571,6 +582,7 @@ preview_print_idle_done (gpointer data)
 static gboolean
 preview_print_idle (gpointer data)
 {
+  g_print("yash kumar kasaudhan: gtkprintoperation.c -> preview_print_idle\n");
   PreviewOp *pop = (PreviewOp *) data;
   GtkPrintOperation *op = GTK_PRINT_OPERATION (pop->preview);
   GtkPrintOperationPrivate *priv = gtk_print_operation_get_instance_private (op);
@@ -608,6 +620,7 @@ preview_got_page_size (GtkPrintOperationPreview *preview,
 		       GtkPageSetup             *page_setup,
 		       PreviewOp                *pop)
 {
+  g_print("yash kumar kasaudhan: gtkprintoperation.c -> preview_got_page_size\n");
   GtkPrintOperation *op = GTK_PRINT_OPERATION (preview);
   cairo_t *cr;
 
@@ -623,6 +636,7 @@ preview_ready (GtkPrintOperationPreview *preview,
                GtkPrintContext          *context,
 	       PreviewOp                *pop)
 {
+  g_print("yash kumar kasaudhan: gtkprintoperation.c -> preview_ready\n");
   guint id;
 
   pop->print_context = context;
@@ -643,6 +657,7 @@ gtk_print_operation_preview_handler (GtkPrintOperation        *op,
 				     GtkPrintContext          *context,
 				     GtkWindow                *parent)
 {
+  g_print("yash kumar kasaudhan: gtkprintoperation.c -> gtk_print_operation_preview_handler\n");
   double dpi_x, dpi_y;
   PreviewOp *pop;
   GtkPageSetup *page_setup;
@@ -684,6 +699,7 @@ gtk_print_operation_preview_handler (GtkPrintOperation        *op,
 static GtkWidget *
 gtk_print_operation_create_custom_widget (GtkPrintOperation *operation)
 {
+  g_print("yash kumar kasaudhan: gtkprintoperation.c -> gtk_print_operation_create_custom_widget\n");
   return NULL;
 }
 
@@ -691,6 +707,7 @@ static gboolean
 gtk_print_operation_paginate (GtkPrintOperation *operation,
                               GtkPrintContext   *context)
 {
+  g_print("yash kumar kasaudhan: gtkprintoperation.c -> gtk_print_operation_paginate\n");
   /* assume the number of pages is already set and pagination is not needed */
   return TRUE;
 }
@@ -699,6 +716,7 @@ static void
 gtk_print_operation_done (GtkPrintOperation       *operation,
                           GtkPrintOperationResult  result)
 {
+  g_print("yash kumar kasaudhan: gtkprintoperation.c -> gtk_print_operation_done\n");
   GtkPrintOperationPrivate *priv = gtk_print_operation_get_instance_private (operation);
 
   if (priv->print_context)
@@ -714,6 +732,7 @@ custom_widget_accumulator (GSignalInvocationHint *ihint,
 			   const GValue          *handler_return,
 			   gpointer               dummy)
 {
+  g_print("yash kumar kasaudhan: gtkprintoperation.c -> custom_widget_accumulator\n");
   gboolean continue_emission;
   GtkWidget *widget;
   
@@ -731,6 +750,7 @@ paginate_accumulator (GSignalInvocationHint *ihint,
                       const GValue          *handler_return,
                       gpointer               dummy)
 {
+  g_print("yash kumar kasaudhan: gtkprintoperation.c -> paginate_accumulator\n");
   *return_accu = *handler_return;
 
   /* Stop signal emission on first invocation, so if it's a callback then
@@ -741,6 +761,7 @@ paginate_accumulator (GSignalInvocationHint *ihint,
 static void
 gtk_print_operation_class_init (GtkPrintOperationClass *class)
 {
+  g_print("yash kumar kasaudhan: gtkprintoperation.c -> gtk_print_operation_class_init\n");
   GObjectClass *gobject_class = (GObjectClass *)class;
 
   gobject_class->set_property = gtk_print_operation_set_property;
@@ -1395,6 +1416,7 @@ gtk_print_operation_class_init (GtkPrintOperationClass *class)
 GtkPrintOperation *
 gtk_print_operation_new (void)
 {
+  g_print("yash kumar kasaudhan: gtkprintoperation.c -> gtk_print_operation_new\n");
   GtkPrintOperation *print_operation;
 
   print_operation = g_object_new (GTK_TYPE_PRINT_OPERATION, NULL);
@@ -1417,6 +1439,7 @@ void
 gtk_print_operation_set_default_page_setup (GtkPrintOperation *op,
 					    GtkPageSetup      *default_page_setup)
 {
+  g_print("yash kumar kasaudhan: gtkprintoperation.c -> gtk_print_operation_set_default_page_setup\n");
   GtkPrintOperationPrivate *priv = gtk_print_operation_get_instance_private (op);
 
   g_return_if_fail (GTK_IS_PRINT_OPERATION (op));
@@ -1448,6 +1471,7 @@ gtk_print_operation_set_default_page_setup (GtkPrintOperation *op,
 GtkPageSetup *
 gtk_print_operation_get_default_page_setup (GtkPrintOperation *op)
 {
+  g_print("yash kumar kasaudhan: gtkprintoperation.c -> gtk_print_operation_get_default_page_setup\n");
   g_return_val_if_fail (GTK_IS_PRINT_OPERATION (op), NULL);
 
   return op->priv->default_page_setup;
@@ -1468,6 +1492,7 @@ void
 gtk_print_operation_set_print_settings (GtkPrintOperation *op,
 					GtkPrintSettings  *print_settings)
 {
+  g_print("yash kumar kasaudhan: gtkprintoperation.c -> gtk_print_operation_set_print_settings\n");
   GtkPrintOperationPrivate *priv = gtk_print_operation_get_instance_private (op);
 
   g_return_if_fail (GTK_IS_PRINT_OPERATION (op));
@@ -1503,6 +1528,7 @@ gtk_print_operation_set_print_settings (GtkPrintOperation *op,
 GtkPrintSettings *
 gtk_print_operation_get_print_settings (GtkPrintOperation *op)
 {
+  g_print("yash kumar kasaudhan: gtkprintoperation.c -> gtk_print_operation_get_print_settings\n");
   g_return_val_if_fail (GTK_IS_PRINT_OPERATION (op), NULL);
 
   return op->priv->print_settings;
@@ -1525,6 +1551,7 @@ void
 gtk_print_operation_set_job_name (GtkPrintOperation *op,
 				  const char        *job_name)
 {
+  g_print("yash kumar kasaudhan: gtkprintoperation.c -> gtk_print_operation_set_job_name\n");
   GtkPrintOperationPrivate *priv = gtk_print_operation_get_instance_private (op);
 
   g_return_if_fail (GTK_IS_PRINT_OPERATION (op));
@@ -1560,6 +1587,7 @@ void
 gtk_print_operation_set_n_pages (GtkPrintOperation *op,
 				 int                n_pages)
 {
+  g_print("yash kumar kasaudhan: gtkprintoperation.c -> gtk_print_operation_set_n_pages\n");
   GtkPrintOperationPrivate *priv = gtk_print_operation_get_instance_private (op);
 
   g_return_if_fail (GTK_IS_PRINT_OPERATION (op));
@@ -1591,6 +1619,7 @@ void
 gtk_print_operation_set_current_page (GtkPrintOperation *op,
 				      int                current_page)
 {
+  g_print("yash kumar kasaudhan: gtkprintoperation.c -> gtk_print_operation_set_current_page\n");
   GtkPrintOperationPrivate *priv = gtk_print_operation_get_instance_private (op);
 
   g_return_if_fail (GTK_IS_PRINT_OPERATION (op));
@@ -1623,6 +1652,7 @@ void
 gtk_print_operation_set_use_full_page (GtkPrintOperation *op,
 				       gboolean           full_page)
 {
+  g_print("yash kumar kasaudhan: gtkprintoperation.c -> gtk_print_operation_set_use_full_page\n");
   GtkPrintOperationPrivate *priv = gtk_print_operation_get_instance_private (op);
 
   g_return_if_fail (GTK_IS_PRINT_OPERATION (op));
@@ -1650,6 +1680,7 @@ void
 gtk_print_operation_set_unit (GtkPrintOperation *op,
 			      GtkUnit            unit)
 {
+  g_print("yash kumar kasaudhan: gtkprintoperation.c -> gtk_print_oepration_set_unit\n");
   GtkPrintOperationPrivate *priv = gtk_print_operation_get_instance_private (op);
 
   g_return_if_fail (GTK_IS_PRINT_OPERATION (op));
@@ -1680,6 +1711,7 @@ void
 gtk_print_operation_set_track_print_status (GtkPrintOperation  *op,
 					    gboolean            track_status)
 {
+  g_print("yash kumar kasaudhan: gtkprintoperation.c -> gtk_print_operation_set_track_print_status\n");
   GtkPrintOperationPrivate *priv = gtk_print_operation_get_instance_private (op);
 
   g_return_if_fail (GTK_IS_PRINT_OPERATION (op));
@@ -1697,6 +1729,7 @@ _gtk_print_operation_set_status (GtkPrintOperation *op,
 				 GtkPrintStatus     status,
 				 const char        *string)
 {
+  g_print("yash kumar kasaudhan: gtkprintoperation.c -> _gtk_print_operation_set_status\n");
   GtkPrintOperationPrivate *priv = gtk_print_operation_get_instance_private (op);
   static const char *status_strs[] = {
     NC_("print operation status", "Initial state"),
@@ -1744,6 +1777,7 @@ _gtk_print_operation_set_status (GtkPrintOperation *op,
 GtkPrintStatus
 gtk_print_operation_get_status (GtkPrintOperation *op)
 {
+  g_print("yash kumar kasaudhan: gtkprintoperation.c -> gtk_print_operation_get_status\n");
   g_return_val_if_fail (GTK_IS_PRINT_OPERATION (op), 
                         GTK_PRINT_STATUS_FINISHED_ABORTED);
 
@@ -1769,6 +1803,7 @@ gtk_print_operation_get_status (GtkPrintOperation *op)
 const char *
 gtk_print_operation_get_status_string (GtkPrintOperation *op)
 {
+  g_print("yash kumar kasaudhan: gtkprintoperation.c -> gtk_print_operation_get_status_string\n");
   g_return_val_if_fail (GTK_IS_PRINT_OPERATION (op), "");
 
   return op->priv->status_string;
@@ -1793,6 +1828,7 @@ gtk_print_operation_get_status_string (GtkPrintOperation *op)
 gboolean
 gtk_print_operation_is_finished (GtkPrintOperation *op)
 {
+  g_print("yash kumar kasaudhan: gtkprintoperation.c -> gtk_print_operation_is_finished\n");
   GtkPrintOperationPrivate *priv = gtk_print_operation_get_instance_private (op);
 
   g_return_val_if_fail (GTK_IS_PRINT_OPERATION (op), TRUE);
@@ -1814,6 +1850,7 @@ void
 gtk_print_operation_set_show_progress (GtkPrintOperation  *op,
 				       gboolean            show_progress)
 {
+  g_print("yash kumar kasaudhan: gtkprintoperation.c -> gtk_print_operation_set_show_progress\n");
   GtkPrintOperationPrivate *priv = gtk_print_operation_get_instance_private (op);
 
   g_return_if_fail (GTK_IS_PRINT_OPERATION (op));
@@ -1843,6 +1880,7 @@ void
 gtk_print_operation_set_allow_async (GtkPrintOperation  *op,
 				     gboolean            allow_async)
 {
+  g_print("yash kumar kasaudhan: gtkprintoperation.c -> gtk_print_operation_set_allow_async\n");
   GtkPrintOperationPrivate *priv = gtk_print_operation_get_instance_private (op);
 
   g_return_if_fail (GTK_IS_PRINT_OPERATION (op));
@@ -1869,6 +1907,7 @@ void
 gtk_print_operation_set_custom_tab_label (GtkPrintOperation  *op,
 					  const char         *label)
 {
+  g_print("yash kumar kasaudhan: gtkprintoperation.c -> gtk_print_operation_set_custom_tab_label\n");
   GtkPrintOperationPrivate *priv = gtk_print_operation_get_instance_private (op);
 
   g_return_if_fail (GTK_IS_PRINT_OPERATION (op));
@@ -1900,6 +1939,7 @@ void
 gtk_print_operation_set_export_filename (GtkPrintOperation *op,
 					 const char        *filename)
 {
+  g_print("yash kumar kasaudhan: gtkprintoperation.c -> gtk_print_operation_set_export_filename\n");
   GtkPrintOperationPrivate *priv = gtk_print_operation_get_instance_private (op);
 
   g_return_if_fail (GTK_IS_PRINT_OPERATION (op));
@@ -1924,6 +1964,7 @@ gtk_print_operation_set_export_filename (GtkPrintOperation *op,
 static GtkPageSetup *
 create_page_setup (GtkPrintOperation *op)
 {
+  g_print("yash kumar kasaudhan: gtkprintoperation.c -> create_page_setup\n");
   GtkPrintOperationPrivate *priv = gtk_print_operation_get_instance_private (op);
   GtkPageSetup *page_setup;
   GtkPrintSettings *settings;
@@ -1962,6 +2003,7 @@ pdf_start_page (GtkPrintOperation *op,
 		GtkPrintContext   *print_context,
 		GtkPageSetup      *page_setup)
 {
+  g_print("yash kumar kasaudhan: gtkprintoperation.c -> pdf_start_page\n");
   cairo_surface_t *surface = op->priv->platform_data;
   double w, h;
 
@@ -1975,6 +2017,7 @@ static void
 pdf_end_page (GtkPrintOperation *op,
 	      GtkPrintContext   *print_context)
 {
+  g_print("yash kumar kasaudhan: gtkprintoperation.c -> pdf_end_page\n");
   cairo_t *cr;
 
   cr = gtk_print_context_get_cairo_context (print_context);
@@ -1990,6 +2033,7 @@ pdf_end_run (GtkPrintOperation *op,
 	     gboolean           wait,
 	     gboolean           cancelled)
 {
+  g_print("yash kumar kasaudhan: gtkprintoperation.c -> pdf_end_run\n");
   GtkPrintOperationPrivate *priv = gtk_print_operation_get_instance_private (op);
   cairo_surface_t *surface = priv->platform_data;
 
@@ -2005,6 +2049,7 @@ run_pdf (GtkPrintOperation  *op,
 	 GtkWindow          *parent,
 	 gboolean           *do_print)
 {
+  g_print("yash kumar kasaudhan: gtkprintoperation.c -> run_pdf\n");
   GtkPrintOperationPrivate *priv = gtk_print_operation_get_instance_private (op);
   GtkPageSetup *page_setup;
   cairo_surface_t *surface;
@@ -2072,6 +2117,7 @@ run_pdf (GtkPrintOperation  *op,
 static void
 clamp_page_ranges (PrintPagesData *data)
 {
+  g_print("yash kumar kasaudhan: gtkprintoperation.c -> clamp_pages_ranges\n");
   GtkPrintOperationPrivate *priv = gtk_print_operation_get_instance_private (data->op);
   int                       num_of_correct_ranges;
   int                       i;
@@ -2110,6 +2156,7 @@ clamp_page_ranges (PrintPagesData *data)
 static void
 increment_page_sequence (PrintPagesData *data)
 {
+  g_print("yash kumar kasaudhan: gtkprintoperation.c -> increment_page_sequence\n");
   GtkPrintOperationPrivate *priv = gtk_print_operation_get_instance_private (data->op);
   int inc;
 
@@ -2204,6 +2251,7 @@ increment_page_sequence (PrintPagesData *data)
 static void
 print_pages_idle_done (gpointer user_data)
 {
+  g_print("yash kumar kasaudan: gtkprintoperation.c -> print_pages_idle_done\n");
   PrintPagesData *data = (PrintPagesData*)user_data;
   GtkPrintOperationPrivate *priv = gtk_print_operation_get_instance_private (data->op);
 
@@ -2243,6 +2291,7 @@ print_pages_idle_done (gpointer user_data)
 static void
 update_progress (PrintPagesData *data)
 {
+  g_print("yash kumar kasaudhan: gtkprintoperation.c -> update_progress\n");
   GtkPrintOperationPrivate *priv = gtk_print_operation_get_instance_private (data->op);
   char *text = NULL;
 
@@ -2281,6 +2330,7 @@ update_progress (PrintPagesData *data)
 void
 gtk_print_operation_set_defer_drawing (GtkPrintOperation *op)
 {
+  g_print("yash kumar kasaudhan: gtkprintoperation.c -> gtk_print_operation_set_defer_drawingn\n");
   GtkPrintOperationPrivate *priv = gtk_print_operation_get_instance_private (op);
 
   g_return_if_fail (priv->page_drawing_state == GTK_PAGE_DRAWING_STATE_DRAWING);
@@ -2301,6 +2351,7 @@ void
 gtk_print_operation_set_embed_page_setup (GtkPrintOperation  *op,
                                           gboolean            embed)
 {
+  g_print("yash kumar kasaudhan: gtkprintoperation.c -> gtk_print_operation_set_embed_page_setup\n");
   GtkPrintOperationPrivate *priv = gtk_print_operation_get_instance_private (op);
 
   g_return_if_fail (GTK_IS_PRINT_OPERATION (op));
@@ -2324,6 +2375,7 @@ gtk_print_operation_set_embed_page_setup (GtkPrintOperation  *op,
 gboolean
 gtk_print_operation_get_embed_page_setup (GtkPrintOperation *op)
 {
+  g_print("yash kumar kasaudhan: gtkprintoperation.c -> gtk_print_operation_get_embed_page_setup\n");
   GtkPrintOperationPrivate *priv = gtk_print_operation_get_instance_private (op);
 
   g_return_val_if_fail (GTK_IS_PRINT_OPERATION (op), FALSE);
@@ -2345,6 +2397,7 @@ gtk_print_operation_get_embed_page_setup (GtkPrintOperation *op)
 void
 gtk_print_operation_draw_page_finish (GtkPrintOperation *op)
 {
+  g_print("yash kumar kasaudhan: gtkprintoperation.c -> gtk_print_operation_draw_page_finish\n");
   GtkPrintOperationPrivate *priv = gtk_print_operation_get_instance_private (op);
   GtkPageSetup *page_setup;
   GtkPrintContext *print_context;
@@ -2368,6 +2421,7 @@ static void
 common_render_page (GtkPrintOperation *op,
 		    int                page_nr)
 {
+  g_print("yash kumar kasaudhan: gtkprintoperation.c -> common_render_page\n");
   GtkPrintOperationPrivate *priv = gtk_print_operation_get_instance_private (op);
   GtkPageSetup *page_setup;
   GtkPrintContext *print_context;
@@ -2594,6 +2648,7 @@ common_render_page (GtkPrintOperation *op,
 static void
 prepare_data (PrintPagesData *data)
 {
+  g_print("yash kumar kasaudhan: gtkprintoperation.c -> prepare_data\n");
   GtkPrintOperationPrivate *priv = gtk_print_operation_get_instance_private (data->op);
   GtkPageSetup             *page_setup;
   gboolean                  paginated = FALSE;
@@ -2761,6 +2816,7 @@ prepare_data (PrintPagesData *data)
 static gboolean
 print_pages_idle (gpointer user_data)
 {
+  g_print("yash kumar kasaudhan: gtkprintoperation.c -> print_pages_idle\n");
   PrintPagesData *data = (PrintPagesData*)user_data;
   GtkPrintOperationPrivate *priv = gtk_print_operation_get_instance_private (data->op);
   gboolean done = FALSE;
@@ -2815,6 +2871,7 @@ handle_progress_response (GtkWidget *dialog,
 			  int        response,
 			  gpointer   data)
 {
+  g_print("yash kumar kasaudhan: gtkprintoperation.c -> handle_progress_response\n");
   GtkPrintOperation *op = (GtkPrintOperation *)data;
 
   gtk_widget_set_visible (dialog, FALSE);
@@ -2824,6 +2881,7 @@ handle_progress_response (GtkWidget *dialog,
 static gboolean
 show_progress_timeout (PrintPagesData *data)
 {
+  g_print("yash kumar kasaudhan: gtkprintoperation.c -> show_progress_timeout\n");
   gtk_window_present (GTK_WINDOW (data->progress));
 
   data->op->priv->show_progress_timeout_id = 0;
@@ -2837,6 +2895,7 @@ print_pages (GtkPrintOperation       *op,
 	     gboolean                 do_print,
 	     GtkPrintOperationResult  result)
 {
+  g_print("yash kumar kasaudhan: gtkprintoperation.c -> print_pages\n");
   GtkPrintOperationPrivate *priv = gtk_print_operation_get_instance_private (op);
   PrintPagesData *data;
  
@@ -2987,6 +3046,7 @@ void
 gtk_print_operation_get_error (GtkPrintOperation  *op,
 			       GError            **error)
 {
+  g_print("yash kumar kasaudhan: gtkprintoperation.c -> gtk_print_operation_get_error\n");
   g_return_if_fail (GTK_IS_PRINT_OPERATION (op));
   
   g_propagate_error (error, op->priv->error);
@@ -3074,6 +3134,7 @@ gtk_print_operation_run (GtkPrintOperation        *op,
 			 GtkWindow                *parent,
 			 GError                  **error)
 {
+  g_print("yash kumar kasaudhan: gtkprintoperation.c -> gtk_print_operation_run\n");
   GtkPrintOperationPrivate *priv = gtk_print_operation_get_instance_private (op);
   GtkPrintOperationResult result;
   GtkPageSetup *page_setup;
@@ -3119,6 +3180,7 @@ gtk_print_operation_run (GtkPrintOperation        *op,
 #ifndef G_OS_WIN32
   else if (priv->allow_async)
     {
+      g_print("yash kumar kasaudhan: gtkprintoperation.c -> gtk_print_operation_run\n");
       priv->is_sync = FALSE;
       _gtk_print_operation_platform_backend_run_dialog_async (op,
 							      action == GTK_PRINT_OPERATION_ACTION_PRINT_DIALOG,
@@ -3169,6 +3231,7 @@ gtk_print_operation_run (GtkPrintOperation        *op,
 void
 gtk_print_operation_cancel (GtkPrintOperation *op)
 {
+  g_print("yash kumar kasaudhan: gtkprintoperation.c -> gtk_print_operation_cancel\n");
   g_return_if_fail (GTK_IS_PRINT_OPERATION (op));
   
   op->priv->cancelled = TRUE;
@@ -3185,6 +3248,7 @@ void
 gtk_print_operation_set_support_selection (GtkPrintOperation  *op,
                                            gboolean            support_selection)
 {
+  g_print("yash kumar kasaudhan: gtkprintoperation.c -> gtk_print_operation_set_support_selection\n");
   GtkPrintOperationPrivate *priv = gtk_print_operation_get_instance_private (op);
 
   g_return_if_fail (GTK_IS_PRINT_OPERATION (op));
@@ -3208,6 +3272,7 @@ gtk_print_operation_set_support_selection (GtkPrintOperation  *op,
 gboolean
 gtk_print_operation_get_support_selection (GtkPrintOperation *op)
 {
+  g_print("yash kumar kasaudhan: gtkprintoperation.c -> gtk_print_operation_get_support_selection\n");
   GtkPrintOperationPrivate *priv = gtk_print_operation_get_instance_private (op);
 
   g_return_val_if_fail (GTK_IS_PRINT_OPERATION (op), FALSE);
@@ -3230,6 +3295,7 @@ void
 gtk_print_operation_set_has_selection (GtkPrintOperation  *op,
                                        gboolean            has_selection)
 {
+  g_print("yash kumar kasaudhan: gtkprintoperation.c -> gtk_print_operation_set_has_selection\n");
   GtkPrintOperationPrivate *priv = gtk_print_operation_get_instance_private (op);
 
   g_return_if_fail (GTK_IS_PRINT_OPERATION (op));
@@ -3253,6 +3319,7 @@ gtk_print_operation_set_has_selection (GtkPrintOperation  *op,
 gboolean
 gtk_print_operation_get_has_selection (GtkPrintOperation *op)
 {
+  g_print("yash kumar kasaudhan: gtkprintoperation.c -> gtk_print_operation_get_has_selection\n");
   GtkPrintOperationPrivate *priv = gtk_print_operation_get_instance_private (op);
 
   g_return_val_if_fail (GTK_IS_PRINT_OPERATION (op), FALSE);
@@ -3280,6 +3347,7 @@ gtk_print_operation_get_has_selection (GtkPrintOperation *op)
 int
 gtk_print_operation_get_n_pages_to_print (GtkPrintOperation *op)
 {
+  g_print("yash kumar kasaudhan: gtkprintoperation.c -> gtk_print_operation_get_n_pages_to_print\n");
   GtkPrintOperationPrivate *priv = gtk_print_operation_get_instance_private (op);
 
   g_return_val_if_fail (GTK_IS_PRINT_OPERATION (op), -1);
