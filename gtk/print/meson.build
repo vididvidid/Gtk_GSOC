@@ -33,6 +33,7 @@ if os_unix
     'gtkprintunixdialog.h',
     'gtkprinter.h',
     'gtkprintjob.h',
+    'gtkprintpreviewpane.h',
   ])
 
   gtk_unix_print_sources += files([
@@ -48,7 +49,15 @@ if os_unix
     'gtkprintoperation-unix.c',
     'gtkprintoperation-portal.c',
     'gtkprintunixdialog.c',
+    'gtkprintpreviewpane.c',
   ])
+
+  print_ui_resources = gnome.compile_resources(
+  'print-ui-resources',
+  'print-ui.gresource.xml',
+  source_dir: 'print',
+  c_name: 'print_ui'
+)
 endif
 
 gtk_win32_print_headers = []

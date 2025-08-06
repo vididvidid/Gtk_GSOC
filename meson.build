@@ -442,7 +442,9 @@ if os_linux
 else
 endif
 
-# Dependencies
+# dependencies
+poppler_req = '>= 22.01'
+poppler_dep = dependency('poppler-glib', version: poppler_req, required: true)
 glib_dep       = dependency('glib-2.0', version: glib_req)
 gi_dep         = dependency('gobject-introspection-1.0', version: gi_req, required: get_option('introspection').enabled())
 gobject_dep    = dependency('gobject-2.0', version: glib_req)
@@ -1074,3 +1076,4 @@ summary('Prefix', gtk_prefix, section: 'Directories')
 summary('Includedir', gtk_includedir, section: 'Directories')
 summary('Libdir', gtk_libdir, section: 'Directories')
 summary('Datadir', gtk_datadir, section: 'Directories')
+
